@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diptangi - Data • Strategy • Tech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(to bottom right, #0f172a, #0f172a, #0f172a);
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        header {
+            border-bottom: 1px solid rgba(71, 85, 105, 0.5);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-content {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #60a5fa, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            padding: 0.5rem;
+            hover: bg-gradient(to right, #1e293b, #0f172a);
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            color: #e2e8f0;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background-color: rgba(30, 41, 59, 0.5);
+        }
+
+        main {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        .intro {
+            margin-bottom: 5rem;
+        }
+
+        .intro p {
+            color: #cbd5e1;
+            font-size: 1.125rem;
+            line-height: 1.75;
+            max-width: 42rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #475569;
+            padding-bottom: 1rem;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            padding-bottom: 1rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-button.active {
+            color: #60a5fa;
+            border-bottom-color: #60a5fa;
+        }
+
+        .tab-button:hover {
+            color: #cbd5e1;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .projects {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: linear-gradient(to bottom right, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.4));
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: rgba(96, 165, 250, 0.5);
+            box-shadow: 0 10px 15px -3px rgba(96, 165, 250, 0.1);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-emoji {
+            font-size: 3rem;
+        }
+
+        .project-title-section {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .project-info h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card:hover h3 {
+            color: #93c5fd;
+        }
+
+        .project-description {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .status-badge {
+            background-color: rgba(71, 85, 105, 0.5);
+            color: #cbd5e1;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.75rem;
+            border-radius: 9999px;
+            white-space: nowrap;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background-color: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            color: #60a5fa;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            border-radius: 0.25rem;
+        }
+
+        .project-link {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+            margin-top: 1rem;
+        }
+
+        .project-link:hover {
+            color: #93c5fd;
+        }
+
+        .cert-card {
+            background: linear-gradient(to bottom right, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.4));
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+        }
+
+        .cert-card:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.1);
+        }
+
+        .cert-emoji {
+            font-size: 3rem;
+        }
+
+        .cert-info h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 0.25rem;
+        }
+
+        .cert-issuer {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        .cert-date {
+            color: #64748b;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        .cert-courses {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .cert-course {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cert-course::before {
+            content: '';
+            width: 0.375rem;
+            height: 0.375rem;
+            background-color: #10b981;
+            border-radius: 9999px;
+        }
+
+        .cert-link {
+            color: #10b981;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            transition: color 0.3s;
+        }
+
+        .cert-link:hover {
+            color: #6ee7b7;
+        }
+
+        footer {
+            border-top: 1px solid rgba(71, 85, 105, 0.5);
+            margin-top: 5rem;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>Diptangi</h1>
+                <p class="subtitle">Data • Strategy • Tech</p>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com" target="_blank">GitHub</a>
+                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <p>Data enthusiast and aspiring analyst. I break down complex datasets and find the insights that actually matter. Currently obsessed with building smart systems at the intersection of AI, analytics, and real business problems.</p>
+        </section>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('projects')">Projects</button>
+            <button class="tab-button" onclick="switchTab('certifications')">Certifications</button>
+        </div>
+
+        <!-- Projects Tab -->
+        <div id="projects" class="tab-content active">
+            <div class="projects">
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-emoji">🎬</div>
+                        <div class="project-title-section">
+                            <div class="project-info">
+                                <h3>Mood-Based Movie Recommendation System</h3>
+                                <p class="project-description">Built a recommendation system that understands your mood. Uses real-time emotion detection to suggest movies you will want to watch. Thesis work combining deep learning with something genuinely useful.</p>
+                            </div>
+                            <span class="status-badge">Completed</span>
+                        </div>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Deep Learning</span>
+                        <span class="tag">ML</span>
+                        <span class="tag">Emotion Detection</span>
+                        <span class="tag">Python</span>
+                    </div>
+                    <a href="https://www.linkedin.com/posts/diptangi-banerjee_deeplearning-project-recommendationsystems-activity-7085066984144478208-RIVf?utm_source=share&utm_medium=member_desktop&rcm=ACoAADlYd9wBZqIXdpok-3kTXZbx_ijh7LpW-AI" target="_blank" class="project-link">View Project →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-emoji">👜</div>
+                        <div class="project-title-section">
+                            <div class="project-info">
+                                <h3>Designer Bags Sales Analysis</h3>
+                                <p class="project-description">Dug into designer bag sales data. Segmented customers, found patterns, built dashboards that tell a story. SQL + Python + a lot of interesting insights.</p>
+                            </div>
+                            <span class="status-badge">Live</span>
+                        </div>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Data Analysis</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Dashboards</span>
+                    </div>
+                    <a href="https://diptangi.github.io/portfolio/projects/designer-bags-analysis/" target="_blank" class="project-link">View Project →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-emoji">⚖️</div>
+                        <div class="project-title-section">
+                            <div class="project-info">
+                                <h3>Bias in Artificial Intelligence</h3>
+                                <p class="project-description">Researched how bias gets into AI systems from messy training data to design choices. Covered real cases like COMPAS, hiring algorithms, facial recognition. Why technical fixes alone won't save us.</p>
+                            </div>
+                            <span class="status-badge">Completed</span>
+                        </div>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">AI Ethics</span>
+                        <span class="tag">Research</span>
+                        <span class="tag">Fairness</span>
+                        <span class="tag">ML</span>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1LtspJILj6_2pQkwv9KT27NzZ3ugeL9fh/view?usp=drive_link" target="_blank" class="project-link">View Project →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-emoji">🏭</div>
+                        <div class="project-title-section">
+                            <div class="project-info">
+                                <h3>IoT Data Architecture for Smart Manufacturing</h3>
+                                <p class="project-description">Built a complete data pipeline for an automotive assembly plant. Edge computing for real-time alerts, stream ingestion managing sensors, data lakes, analytics warehouses. Raw sensor noise to actionable intelligence.</p>
+                            </div>
+                            <span class="status-badge">Completed</span>
+                        </div>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">IoT</span>
+                        <span class="tag">Data Architecture</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Analytics</span>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1x2oUaMUDNRI4V3nGz6BV2WCfiqYjQoWc/view?usp=sharing" target="_blank" class="project-link">View Project →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-emoji">🔍</div>
+                        <div class="project-title-section">
+                            <div class="project-info">
+                                <h3>Can Generative AI Replace Traditional Search?</h3>
+                                <p class="project-description">What if AI could actually replace Google? Exploring how generative AI is reshaping search, where opportunities are, what it means for the future. Questions are wild.</p>
+                            </div>
+                            <span class="status-badge">In Progress</span>
+                        </div>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">Generative AI</span>
+                        <span class="tag">Research</span>
+                        <span class="tag">Strategy</span>
+                        <span class="tag">In Progress</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certifications Tab -->
+        <div id="certifications" class="tab-content">
+            <div class="cert-card">
+                <div class="cert-emoji">📊</div>
+                <div class="cert-info">
+                    <h3>Microsoft Excel Professional Certificate</h3>
+                    <p class="cert-issuer">Microsoft × Coursera</p>
+                    <p class="cert-date">Jun 2026</p>
+                    <div class="cert-courses">
+                        <p class="cert-course">Excel and Copilot Fundamentals</p>
+                        <p class="cert-course">Data Cleaning & Processing with Copilot</p>
+                        <p class="cert-course">Advanced Data Analysis & Visualization</p>
+                        <p class="cert-course">Automation & Advanced Techniques</p>
+                    </div>
+                    <a href="https://coursera.org/verify/professional-cert/L7K62F79RCHX" target="_blank" class="cert-link">Verify Certificate →</a>
+                </div>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-emoji">⚙️</div>
+                <div class="cert-info">
+                    <h3>Automation & Advanced Techniques with Copilot in Excel</h3>
+                    <p class="cert-issuer">Microsoft × Coursera</p>
+                    <p class="cert-date">Jun 2026</p>
+                    <a href="https://coursera.org/verify/FGRXRSSBBCTB" target="_blank" class="cert-link">Verify Certificate →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Built for recruiters who get it. Dark mode because light themes are evil. Hit me up.</p>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.getElementById('projects').classList.remove('active');
+            document.getElementById('certifications').classList.remove('active');
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
